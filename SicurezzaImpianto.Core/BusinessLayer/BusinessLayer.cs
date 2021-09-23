@@ -1,4 +1,5 @@
-﻿using SicurezzaImpianto.Core.Interfaces;
+﻿using SicurezzaImpianto.Core.Entities;
+using SicurezzaImpianto.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,8 @@ namespace SicurezzaImpianto.Core
 
         public void EseguiCalcoli()
         {
-
-
+            List<Esalazione> esalazioni = esalazRep.GetItemsWithOutState();
+            List<Temperatura> temperature = tempRep.GetItemsWithOutState();
         }
     }
 }

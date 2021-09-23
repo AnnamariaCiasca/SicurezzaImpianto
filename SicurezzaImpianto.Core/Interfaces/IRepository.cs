@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SicurezzaImpianto.Core.Repositories
 {
-   public interface IRepository
+   public interface IRepository<T>
     {
+        List<T> GetItemsWithOutState();
     }
 }

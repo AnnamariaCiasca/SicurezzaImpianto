@@ -1,4 +1,5 @@
-﻿using SicurezzaImpianto.Core.Repositories;
+﻿using SicurezzaImpianto.Core.Entities;
+using SicurezzaImpianto.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SicurezzaImpianto.Core.Interfaces
 {
-    public interface IEsalazioneRepository: IRepository
+    public interface IEsalazioneRepository : IRepository<Esalazione>
     {
     }
 }
