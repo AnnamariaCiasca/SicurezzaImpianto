@@ -10,5 +10,6 @@ namespace SicurezzaImpianto.Core.Repositories
     {
         List<T> GetItemsWithOutState();
         void Update(T item);
+        public void Insert(T item);
     }
 }

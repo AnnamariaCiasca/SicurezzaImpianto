@@ -53,6 +53,7 @@ namespace SicurezzaImpianto.ADORepository
 
         }
 
+     
         public void Update(Esalazione item)
         {
             try
@@ -78,6 +79,28 @@ namespace SicurezzaImpianto.ADORepository
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+
+        public void Insert(Esalazione es)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "INSERT INTO dbo.EsalazioniTossiche VALUES (@concentrazionePpm, @dataMisurazione, @oraMisurazione, @stato)";
+                command.Parameters.AddWithValue("@concentrazionePpm", es.ConcentrazionePpm);
+                command.Parameters.AddWithValue("@dataMisurazione", es.DataMisurazione);
+                command.Parameters.AddWithValue("@oraMisurazione", es.OraMisurazione);
+                command.Parameters.AddWithValue("@stato", DBNull.Value);
+
+
+
+                command.ExecuteNonQuery();
             }
         }
     }

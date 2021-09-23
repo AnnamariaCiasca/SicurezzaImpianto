@@ -79,10 +79,35 @@ namespace SicurezzaImpianto.Core
        
             using(StreamWriter sw = new StreamWriter(path, true))
             {
-                sw.WriteLine($"{esalazione.DataMisurazione}, {esalazione.OraMisurazione} - Temperatura: {tmt.ValoreTemperatura} °C - Esalazione {esalazione.ConcentrazionePpm}");
+                sw.WriteLine($"{esalazione.DataMisurazione.ToShortDateString()}, {esalazione.OraMisurazione} - Temperatura: {tmt.ValoreTemperatura} °C - Esalazione: {esalazione.ConcentrazionePpm} ppm");
             }
         
         
+        }
+
+        public void InserisciTemperatura(double valoreTemp)     
+
+        {
+            Temperatura temp = new Temperatura();
+
+            temp.ValoreTemperatura = valoreTemp;
+            temp.DataMisurazione = DateTime.Now;
+            temp.OraMisurazione = DateTime.Now.TimeOfDay;
+            tempRep.Insert(temp);
+            Console.WriteLine("\nLa temperatura è stata correttamente inserita.");
+        }
+
+
+        public void InserisciEsalazione(double concentraz)
+
+        {
+            Esalazione es = new Esalazione();
+
+            es.ConcentrazionePpm = concentraz;
+            es.DataMisurazione = DateTime.Now;
+            es.OraMisurazione = DateTime.Now.TimeOfDay;
+            esalazRep.Insert(es);
+            Console.WriteLine("\nLa Concentrazione di Esalazioni Tossiche è stata correttamente inserita.");
         }
     }
 }

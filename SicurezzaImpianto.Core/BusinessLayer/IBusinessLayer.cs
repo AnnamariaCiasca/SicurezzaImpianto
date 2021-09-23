@@ -9,5 +9,8 @@ namespace SicurezzaImpianto.Core
     public interface IBusinessLayer
     {
         void EseguiCalcoli();
+        void InserisciTemperatura(double valoreTemp);
+
+        void InserisciEsalazione(double concentraz);
     }
 }

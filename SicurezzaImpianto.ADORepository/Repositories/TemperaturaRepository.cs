@@ -78,5 +78,25 @@ namespace SicurezzaImpianto.ADORepository
                 throw ex;
             }
         }
+
+        public void Insert(Temperatura temp)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "INSERT INTO dbo.Temperatura VALUES (@valoreTemperatura, @dataMisurazione, @oraMisurazione, @stato)";
+                command.Parameters.AddWithValue("@valoreTemperatura", temp.ValoreTemperatura);
+                command.Parameters.AddWithValue("@dataMisurazione", temp.DataMisurazione);
+                command.Parameters.AddWithValue("@oraMisurazione", temp.OraMisurazione);
+                command.Parameters.AddWithValue("@stato", DBNull.Value);
+
+
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }
