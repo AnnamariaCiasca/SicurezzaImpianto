@@ -14,35 +14,71 @@ namespace SicurezzaImpianto.ADORepository
         const string connectionString = @"Data Source = (localdb)\MSSQLLocalDB;" +
                                          "Initial Catalog = AcademyI;" +
                                          "Integrated Security = true";
-        public  List<Esalazione> GetItemsWithOutState()
+        public List<Esalazione> GetItemsWithOutState()
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
-
-                SqlCommand command = new SqlCommand();
-                command.Connection = connection;
-                command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "SELECT * FROM dbo.EsalazioniTossiche WHERE Stato IS NULL";
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                List<Esalazione> esalazioni = new List<Esalazione>();
-
-                while (reader.Read())
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    Esalazione esalazione = new Esalazione();
-                    esalazione.Id = (int)reader["Id"];
-                    esalazione.DataMisurazione = Convert.ToDateTime(reader["DataMisurazione"]);
-                    esalazione.OraMisurazione = (TimeSpan)reader["OraMisurazione"];
-                    esalazione.ConcentrazionePpm = Convert.ToDouble(reader["ConcentrazionePPm"]);
+                    connection.Open();
 
-                    esalazioni.Add(esalazione);
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = "SELECT * FROM dbo.EsalazioniTossiche WHERE Stato IS NULL";
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    List<Esalazione> esalazioni = new List<Esalazione>();
+
+                    while (reader.Read())
+                    {
+                        Esalazione esalazione = new Esalazione();
+                        esalazione.Id = (int)reader["Id"];
+                        esalazione.DataMisurazione = Convert.ToDateTime(reader["DataMisurazione"]);
+                        esalazione.OraMisurazione = (TimeSpan)reader["OraMisurazione"];
+                        esalazione.ConcentrazionePpm = Convert.ToDouble(reader["ConcentrazionePPm"]);
+
+                        esalazioni.Add(esalazione);
+                    }
+                    return esalazioni;
                 }
-                return esalazioni;
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
-            
+        }
+
+        public void Update(Esalazione item)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = "UPDATE dbo.EsalazioniTossiche SET Stato=@stato WHERE Id=@id";
+                    command.Parameters.AddWithValue("@stato", item.Stato);
+                    command.Parameters.AddWithValue("@id", item.Id);
+                    command.ExecuteNonQuery();
+
+
+
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

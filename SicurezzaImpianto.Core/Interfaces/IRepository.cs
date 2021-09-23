@@ -9,5 +9,6 @@ namespace SicurezzaImpianto.Core.Repositories
    public interface IRepository<T>
     {
         List<T> GetItemsWithOutState();
+        void Update(T item);
     }
 }

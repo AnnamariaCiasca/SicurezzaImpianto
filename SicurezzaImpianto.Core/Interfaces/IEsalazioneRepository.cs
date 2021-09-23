@@ -10,5 +10,6 @@ namespace SicurezzaImpianto.Core.Interfaces
 {
     public interface IEsalazioneRepository : IRepository<Esalazione>
     {
+      
     }
 }

@@ -5,6 +5,7 @@
 //o di concentrazione in ppm, rispettivamente. Un unico sistema
 //di monitoraggio deve produrre messaggi di avviso al personale.
 
+using SicurezzaImpianto.ADORepository;
 using SicurezzaImpianto.Core;
 using SicurezzaImpianto.Core.Repositories;
 
@@ -17,7 +18,14 @@ namespace SicurezzaImpianto
         private static readonly IBusinessLayer bl = new BusinessLayer(new TemperaturaRepository(), new EsalazioneRepository()); 
         static void Main(string[] args)
         {
-            bl.EseguiCalcoli();
+            try
+            {
+                bl.EseguiCalcoli();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

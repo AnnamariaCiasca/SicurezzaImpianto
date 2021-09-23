@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SicurezzaImpianto.ADORepository\SicurezzaImpianto.ADORepository.csproj" />
     <ProjectReference Include="..\SicurezzaImpianto.Core\SicurezzaImpianto.Core.csproj" />
   </ItemGroup>
 
